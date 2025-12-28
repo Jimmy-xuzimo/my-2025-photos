@@ -179,29 +179,14 @@ php -S localhost:8000
 
 - **作者**：Xu Zimo
 - **GitHub**：[@xuzimo](https://github.com/xuzimo)
-- **邮箱**：xuzimo@example.com
+- **邮箱**：xuzimojimmy@163.com
 
 ## 🙏 致谢
 
 感谢所有为这个项目提供灵感和帮助的人！
-
-- [Unsplash](https://unsplash.com) - 封面图片来源
 - [Font Awesome](https://fontawesome.com) - 图标字体库
 - [Google Fonts](https://fonts.google.com) - 字体资源
 
-## 📊 项目统计
-
-<div align="center">
-
-![项目截图](https://via.placeholder.com/800x400?text=我的2025相册+截图)
-
-*应用界面预览*
-
-</div>
-
----
-
-<div align="center">
 
 **用照片记录生活，用时光编织回忆**
 
