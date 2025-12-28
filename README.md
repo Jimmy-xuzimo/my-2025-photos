@@ -1,0 +1,210 @@
+# 我的2025相册
+
+<div align="center">
+
+一个精致的个人照片回顾网页应用，用30张照片记录2025年的美好瞬间。
+
+[![GitHub stars](https://img.shields.io/github/stars/xuzimo/my-2025-photos)](https://github.com/xuzimo/my-2025-photos/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/xuzimo/my-2025-photos)](https://github.com/xuzimo/my-2025-photos/network)
+[![License](https://img.shields.io/github/license/xuzimo/my-2025-photos)](https://github.com/xuzimo/my-2025-photos/blob/main/LICENSE)
+
+</div>
+
+## 📖 项目概述
+
+「我的2025相册」是一个基于Web技术的个人照片展示应用，旨在帮助用户以优雅的方式回顾和分享2025年的照片记忆。本项目采用现代化的前端技术栈，实现了响应式设计、流畅的动画效果和便捷的照片导航功能。
+
+### 核心理念
+
+- **时光标本**：每一张照片都是时光的切片，记录生活的美好瞬间
+- **极简设计**：去除繁琐的装饰，让照片成为主角
+- **跨平台兼容**：支持桌面端和移动端，随时随地回顾美好
+- **隐私保护**：所有照片存储在本地，不涉及任何第三方服务器
+
+## ✨ 核心功能
+
+### 照片浏览
+
+- **顺序浏览**：按照预设的固定顺序浏览所有照片
+- **快速跳转**：支持上一张/下一张导航
+- **自动播放**：开启自动播放功能，静静欣赏每一张照片
+- **键盘控制**：支持键盘快捷键操作（← → 空格键）
+- **触摸滑动**：移动端支持左右滑动切换照片
+
+### 响应式设计
+
+- **多设备适配**：完美适配桌面端、平板和手机
+- **横竖屏支持**：智能适应屏幕方向变化
+- **高分辨率支持**：支持Retina屏幕等高分辨率显示
+
+### 用户界面
+
+- **优雅动画**：流畅的页面切换和过渡动画
+- **暗色主题**：保护眼睛的深色主题设计
+- **设备信息显示**：每张照片标注拍摄设备信息
+- **照片计数器**：清晰显示当前浏览位置
+
+## 🚀 快速开始
+
+### 环境要求
+
+- **操作系统**：Windows / macOS / Linux
+- **浏览器**：Chrome、Firefox、Safari、Edge（最新版本）
+- **本地服务器**：Python 3.x 或任意Web服务器
+
+### 安装步骤
+
+1. **克隆项目**
+
+```bash
+git clone https://github.com/xuzimo/my-2025-photos.git
+cd my-2025-photos
+```
+
+2. **启动本地服务器**
+
+使用Python启动本地服务器：
+
+```bash
+# Python 3.x
+python3 -m http.server 8000
+```
+
+或使用其他Web服务器：
+
+```bash
+# 使用 Node.js (需要安装 http-server)
+npx http-server -p 8000
+
+# 使用 PHP
+php -S localhost:8000
+
+# 使用 VS Code Live Server 插件
+# 打开 index.html，点击右下角的 "Go Live"
+```
+
+3. **访问应用**
+
+打开浏览器，访问：[http://localhost:8000](http://localhost:8000)
+
+### 部署到服务器
+
+#### 使用 GitHub Pages（推荐）
+
+1. 将项目上传到GitHub仓库
+2. 进入仓库设置
+3. 在「Pages」设置中选择 `main` 分支作为源
+4. 保存后即可通过 `https://yourusername.github.io/repository-name` 访问
+
+#### 使用其他托管服务
+
+将 `上传` 文件夹中的所有内容上传到你的Web托管服务器即可。
+
+## 📖 使用指南
+
+### 基本操作
+
+| 操作 | 桌面端 | 移动端 |
+|------|--------|--------|
+| 上一张照片 | 点击「◀」或按 `←` | 左滑或点击「◀」 |
+| 下一张照片 | 点击「▶」或按 `→` | 右滑或点击「▶」 |
+| 自动播放 | 点击「▶/⏯」按钮 | 点击「▶/⏯」按钮 |
+| 返回首页 | 点击「🏠」按钮 | 点击「🏠」按钮 |
+| 暂停播放 | 按 `空格键` | 点击「⏸」按钮 |
+
+### 键盘快捷键
+
+| 快捷键 | 功能 |
+|--------|------|
+| `←` | 上一张照片 |
+| `→` | 下一张照片 |
+| `空格` | 播放/暂停 |
+
+### 照片顺序说明
+
+本应用采用固定随机顺序展示照片，使用固定的随机种子确保每次打开相册时照片顺序一致。这种设计既保证了每次浏览的惊喜感，又确保了浏览体验的可预期性。
+
+## 📂 项目结构
+
+```
+上传/
+├── index.html          # 主页面
+├── css/
+│   └── style.css       # 样式文件
+├── js/
+│   └── main.js         # 核心逻辑
+└── photos/
+    ├── SONY/           # Sony设备拍摄的照片
+    ├── OPPO/           # OPPO设备拍摄的照片
+    └── DJI/            # DJI设备拍摄的照片
+```
+
+## 🔧 技术栈
+
+- **HTML5**：语义化标记
+- **CSS3**：现代样式设计
+  - Flexbox/Grid 布局
+  - CSS 动画和过渡效果
+  - 响应式设计
+- **JavaScript (ES6+)**：原生JavaScript
+  - DOM 操作
+  - 事件处理
+  - 触摸手势识别
+- **无框架依赖**：轻量级，无外部依赖
+
+## 🤝 贡献规范
+
+我们欢迎社区贡献来改进这个项目！如果你想要贡献，请遵循以下步骤：
+
+### 如何贡献
+
+1. **Fork 本项目**
+2. **创建你的分支** (`git checkout -b feature/AmazingFeature`)
+3. **提交你的更改** (`git commit -m 'Add some AmazingFeature'`)
+4. **推送到分支** (`git push origin feature/AmazingFeature`)
+5. **开启一个 Pull Request`
+
+### 贡献建议
+
+- 修复bug时，请详细描述问题现象和复现步骤
+- 新增功能时，请说明功能用途和实现思路
+- 改进文档时，请保持语言简洁、逻辑清晰
+- 遵守项目的代码风格和规范
+
+## 📄 许可证
+
+本项目采用 MIT 许可证开源，详情请参阅 [LICENSE](LICENSE) 文件。
+
+## 📧 联系方式
+
+- **作者**：Xu Zimo
+- **GitHub**：[@xuzimo](https://github.com/xuzimo)
+- **邮箱**：xuzimo@example.com
+
+## 🙏 致谢
+
+感谢所有为这个项目提供灵感和帮助的人！
+
+- [Unsplash](https://unsplash.com) - 封面图片来源
+- [Font Awesome](https://fontawesome.com) - 图标字体库
+- [Google Fonts](https://fonts.google.com) - 字体资源
+
+## 📊 项目统计
+
+<div align="center">
+
+![项目截图](https://via.placeholder.com/800x400?text=我的2025相册+截图)
+
+*应用界面预览*
+
+</div>
+
+---
+
+<div align="center">
+
+**用照片记录生活，用时光编织回忆**
+
+Made with ❤️ by Xu Zimo
+
+</div>

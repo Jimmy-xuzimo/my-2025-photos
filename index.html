@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>用30张照片回顾我的2025</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">正在加载相册...</p>
+    </div>
+
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-background"></div>
+        <div class="intro-content" id="introContent">
+            <div class="intro-text-content">
+                <p class="intro-quote">"照片是时光的标本"</p>
+                <h1 class="intro-title">用30张照片<br>回顾我的2025</h1>
+                <p class="intro-subtitle">每一帧都是生活的切片</p>
+            </div>
+            <button class="open-album-btn" id="openAlbumBtn">
+                <span class="btn-text">打开相册</span>
+                <span class="btn-arrow">→</span>
+            </button>
+        </div>
+        <p class="intro-credit">Photography by Xu Zimo</p>
+    </div>
+
+    <div class="album-screen" id="albumScreen">
+        <div class="photo-container" id="photoContainer">
+            <div class="photo-wrapper">
+                <div class="photo-frame" id="photoFrame">
+                    <img src="" alt="照片" class="photo-image" id="photoImage">
+                </div>
+                <p class="photo-device" id="photoDevice">Shot By</p>
+            </div>
+        </div>
+
+        <div class="album-controls" id="albumControls">
+            <div class="control-left-group">
+                <button class="control-btn" id="homeBtn" title="返回首页">
+                    <span class="icon">🏠</span>
+                </button>
+                <button class="control-btn play-btn" id="playBtn" title="自动播放">
+                    <span class="icon" id="playIcon">⏯</span>
+                </button>
+            </div>
+            <span class="photo-counter">
+                <span id="currentIndex">1</span>
+                <span class="counter-divider">/</span>
+                <span id="totalCount">28</span>
+            </span>
+            <div class="control-right-group">
+                <button class="control-btn nav-btn" id="prevBtn" title="上一张">◀</button>
+                <button class="control-btn nav-btn" id="nextBtn" title="下一张">▶</button>
+            </div>
+        </div>
+
+        <p class="album-credit">Photography by Xu Zimo</p>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 在页面加载完成后，输出照片顺序到控制台
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('Photo order will be displayed when album is opened.');
+        });
+    </script>
+    <!-- 测试脚本，用于验证照片墙点击功能 -->
+    <!-- <script src="test-photo-wall.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,712 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #141414;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --accent-color: #c9a87c;
+}
+
+html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-overlay.hidden,
+body:has(.intro-screen) .loading-overlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    margin-top: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    background: var(--bg-primary);
+    overflow: hidden;
+}
+
+.intro-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(201, 168, 124, 0.08) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.intro-screen.active .intro-background {
+    opacity: 1;
+}
+
+.intro-content {
+    text-align: center;
+    z-index: 1;
+    transform: translateX(0);
+    opacity: 1;
+    transition: all 1s ease;
+}
+
+.intro-content.hidden {
+    transform: translateX(-150px);
+    opacity: 0;
+}
+
+.intro-text-content {
+    margin-bottom: 100px;
+}
+
+.intro-quote {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-style: italic;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease 0.3s forwards;
+}
+
+.intro-title {
+    /* 适当放大标题，不超过120% */
+    font-size: clamp(2.2rem, 12vw, 5.5rem);
+    font-weight: 100;
+    line-height: 1.3;
+    letter-spacing: 0.15em;
+    margin-bottom: 25px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease 0.5s forwards;
+}
+
+.intro-subtitle {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: var(--text-secondary);
+    letter-spacing: 0.3em;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease 0.7s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.open-album-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 45px;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    transform: translateX(0);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.9s forwards;
+}
+
+.open-album-btn.hidden {
+    transform: translateX(200px);
+    opacity: 0;
+}
+
+.open-album-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(201, 168, 124, 0.2);
+}
+
+.btn-arrow {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.open-album-btn:hover .btn-arrow {
+    transform: translateX(5px);
+}
+
+.intro-credit,
+.album-credit {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    opacity: 0;
+    transition: opacity 1s ease 1.2s;
+}
+
+.intro-screen.active .intro-credit,
+.album-credit {
+    opacity: 0.6;
+}
+
+.album-credit {
+    position: absolute;
+    bottom: 20px;
+    z-index: 50;
+}
+
+.album-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.album-screen.visible {
+    display: flex;
+    opacity: 1;
+}
+
+.photo-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 移除内边距，消除黑色边框效果 */
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    /* 确保容器背景与相册屏幕一致 */
+    background: var(--bg-secondary);
+}
+
+.photo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    /* 调整外边距，确保照片居中显示 */
+    margin: 40px 20px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    /* 确保照片容器能占据完整高度 */
+    flex: 1;
+    justify-content: center;
+}
+
+.photo-frame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    overflow: visible;
+    /* 确保照片框架能占据完整高度 */
+    flex: 1;
+}
+
+.photo-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* 添加光源效果 - 从底部向上投射的光线 */
+    background: radial-gradient(circle at 50% 100%, 
+        rgba(201, 168, 124, 0.3) 0%, 
+        rgba(201, 168, 124, 0.2) 20%, 
+        rgba(201, 168, 124, 0.1) 40%, 
+        transparent 70%);
+    /* 增加底部光线强度 */
+    box-shadow: 
+        /* 底部主光源 */
+        0 20px 60px rgba(201, 168, 124, 0.3),
+        /* 侧面漫反射 */
+        -20px 0 60px rgba(201, 168, 124, 0.1),
+        20px 0 60px rgba(201, 168, 124, 0.1),
+        /* 顶部反射光 */
+        0 -20px 40px rgba(201, 168, 124, 0.05);
+    pointer-events: none;
+    /* 调整层级，确保在照片下方 */
+    z-index: -1;
+    /* 扩大光晕范围 */
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.photo-image {
+    display: block;
+    /* 调整最大宽度和高度，使用完整可用空间 */
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 140px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    will-change: opacity;
+    /* 移除边框 */
+    border-radius: 0;
+    /* 确保没有边框或阴影 */
+    box-shadow: none;
+    border: none;
+}
+
+.photo-device {
+    color: var(--text-secondary);
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    opacity: 0.9;
+    /* 重新定位至照片区域正下方，与照片底部边缘对齐 */
+    display: block;
+    visibility: visible;
+    position: relative;
+    z-index: 10;
+    margin-top: 15px;
+    text-align: center;
+    /* 添加与整体UI风格一致的样式 */
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+    /* 确保与照片底部边缘对齐 */
+    align-self: center;
+    /* 保持适当间距 */
+    padding: 0 20px;
+}
+
+.photo-device:hover {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+.album-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, var(--bg-primary) 0%, rgba(10, 10, 10, 0.92) 40%, rgba(10, 10, 10, 0) 100%);
+    /* 增加左右内边距，确保按钮与屏幕边缘有适当的间距 */
+    padding: 20px 50px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+/* 左右按钮组样式 */
+.control-left-group,
+.control-right-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 左边按钮组沿左侧边缘对齐 */
+.control-left-group {
+    justify-content: flex-start;
+}
+
+/* 右边按钮组沿右侧边缘对齐 */
+.control-right-group {
+    justify-content: flex-end;
+}
+
+/* 移除原来的控制区域样式，因为我们已经使用了新的分组 */
+.control-left,
+.control-center,
+.control-right {
+    display: none;
+}
+
+/* 确保照片计数器在中间位置 */
+.photo-counter {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+    /* 添加一些样式，使页码更突出 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter-divider {
+    margin: 0 5px;
+    opacity: 0.5;
+}
+
+.control-btn {
+    /* 固定宽度和高度，确保所有控制按钮尺寸一致 */
+    width: 50px;
+    height: 50px;
+    /* 移除动态尺寸变化的属性 */
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    /* 确保图标颜色为白色，与整体风格一致 */
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 移除会导致尺寸变化的属性 */
+    padding: 0;
+    margin: 0;
+    /* 确保在任何状态下尺寸不变 */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 确保所有按钮图标颜色一致 */
+.control-btn .icon {
+    color: inherit;
+    font-size: inherit;
+}
+
+.control-btn:hover {
+    /* 移除会导致尺寸变化的transform属性 */
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 4px 12px rgba(201, 168, 124, 0.2);
+}
+
+.control-btn.active {
+    background: rgba(201, 168, 124, 0.2);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 4px 12px rgba(201, 168, 124, 0.3);
+}
+
+.control-btn .icon {
+    font-size: 1.1rem;
+    /* 确保图标居中显示 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 所有按钮保持一致的尺寸，包括导航按钮 */
+.nav-btn {
+    /* 与其他控制按钮保持相同的固定尺寸 */
+    width: 50px;
+    height: 50px;
+    /* 移除所有可能影响尺寸的属性 */
+    padding: 0;
+    min-width: auto;
+    justify-content: center;
+}
+
+
+
+/* 移除了照片墙相关样式 */
+
+@media (max-width: 900px) {
+    .photo-container {
+        /* 移除内边距，消除黑色边框效果 */
+        padding: 0;
+    }
+    
+    .photo-wrapper {
+        /* 调整外边距以适应小屏幕 */
+        margin: 70px 15px 90px;
+    }
+    
+    .photo-frame {
+        /* 移除画框内边距 */
+        padding: 0;
+    }
+    
+    .photo-image {
+        max-width: calc(100vw - 30px);
+        max-height: calc(100vh - 200px);
+    }
+}
+
+@media (max-width: 768px) {
+    .intro-title {
+        letter-spacing: 0.08em;
+    }
+    
+    .intro-quote {
+        letter-spacing: 0.15em;
+    }
+    
+    .open-album-btn {
+        padding: 14px 35px;
+        font-size: 0.95rem;
+    }
+    
+    /* 针对手机界面的调整 */
+    /* 1. 将intro-text-content整体放大至120% */
+    .intro-text-content {
+        transform: scale(1.2);
+        /* 确保缩放后元素居中显示 */
+        transform-origin: center center;
+    }
+    
+    /* 2. 将open-album-btn向下移动适当距离 */
+    .open-album-btn {
+        margin-top: 20px;
+    }
+    
+    /* 3. 将intro-credit向上移动适当距离 */
+    .intro-credit {
+        bottom: 40px;
+    }
+    
+    .photo-container {
+        /* 移除内边距，消除黑色边框效果 */
+        padding: 0;
+    }
+    
+    .photo-wrapper {
+        /* 调整外边距以适应小屏幕 */
+        margin: 60px 10px 85px;
+    }
+    
+    .photo-frame {
+        /* 移除画框内边距 */
+        padding: 0;
+    }
+    
+    .photo-image {
+        max-width: calc(100vw - 24px);
+        max-height: calc(100vh - 200px);
+    }
+    
+    .album-controls {
+        padding: 15px;
+        /* 移除换行，确保所有元素在同一排 */
+        flex-wrap: nowrap;
+        /* 确保控制栏不会溢出 */
+        overflow: hidden;
+    }
+    
+    /* 调整左右按钮组的间距，适应小屏幕 */
+    .control-left-group,
+    .control-right-group {
+        gap: 10px;
+    }
+    
+    /* 确保按钮尺寸保持一致 */
+    .control-btn {
+        /* 保持固定尺寸，不随屏幕大小变化 */
+        width: 45px;
+        height: 45px;
+        padding: 0;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-quote {
+        font-size: 0.85rem;
+    }
+    
+    .intro-title {
+        font-size: 1.8rem;
+        letter-spacing: 0.05em;
+    }
+    
+    .intro-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    /* 针对手机界面的调整 */
+    /* 1. 将intro-text-content整体放大至120% */
+    .intro-text-content {
+        transform: scale(1.2);
+        /* 确保缩放后元素居中显示 */
+        transform-origin: center center;
+    }
+    
+    /* 2. 将open-album-btn向下移动适当距离 */
+    .open-album-btn {
+        margin-top: 20px;
+    }
+    
+    /* 3. 将intro-credit向上移动适当距离 */
+    .intro-credit {
+        bottom: 40px;
+    }
+    
+    .photo-container {
+        /* 移除内边距，消除黑色边框效果 */
+        padding: 0;
+    }
+    
+    .photo-wrapper {
+        /* 调整外边距以适应小屏幕 */
+        margin: 55px 8px 80px;
+    }
+    
+    .photo-frame {
+        /* 移除画框内边距 */
+        padding: 0;
+    }
+    
+    .photo-image {
+        max-width: calc(100vw - 16px);
+        max-height: calc(100vh - 180px);
+    }
+    
+    .photo-device {
+        font-size: 0.8rem;
+    }
+    
+    /* 确保在480px以下屏幕上控制栏仍然保持在同一排 */
+    .album-controls {
+        padding: 10px;
+    }
+    
+    /* 调整左右按钮组的间距，适应小屏幕 */
+    .control-left-group,
+    .control-right-group {
+        gap: 6px;
+    }
+    
+    /* 进一步缩小按钮尺寸以适应更小的屏幕 */
+    .control-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 0.85rem;
+    }
+    
+    /* 调整计数器字体大小，确保能在同一排显示 */
+    .photo-counter {
+        font-size: 0.75rem;
+    }
+    
+    .album-credit {
+        font-size: 0.7rem;
+        bottom: 15px;
+    }
+}
+
+/* 针对横屏状态下的手机优化 */
+@media (orientation: landscape) {
+    /* 确保照片容器能占据更多空间 */
+    .photo-wrapper {
+        margin: 20px;
+    }
+    
+    /* 让照片占据更大比例的屏幕空间 */
+    .photo-image {
+        max-width: calc(100vw - 80px);
+        max-height: calc(100vh - 80px);
+    }
+    
+    /* 缩小控制按钮尺寸，避免占据过多空间 */
+    .control-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 0.85rem;
+    }
+    
+    /* 调整控制栏样式，确保按钮不会太大 */
+    .album-controls {
+        padding: 15px 20px;
+    }
+    
+    /* 调整左右按钮组间距 */
+    .control-left-group,
+    .control-right-group {
+        gap: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (supports-backdrop-filter: blur(10px)) {
+    .album-controls {
+        background: linear-gradient(to top, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.7) 40%, transparent 100%);
+        backdrop-filter: blur(10px);
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .photo-image,
+    .modal-image {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
