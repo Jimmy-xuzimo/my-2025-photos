@@ -62,7 +62,6 @@ const elements = {
     photoContainer: document.getElementById('photoContainer'),
     photoFrame: document.getElementById('photoFrame'),
     photoImage: document.getElementById('photoImage'),
-    photoDevice: document.getElementById('photoDevice'),
     currentIndexEl: document.getElementById('currentIndex'),
     totalCountEl: document.getElementById('totalCount'),
     playBtn: document.getElementById('playBtn'),

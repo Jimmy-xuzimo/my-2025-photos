@@ -274,35 +274,7 @@ body:has(.intro-screen) .loading-overlay {
     flex: 1;
 }
 
-.photo-frame::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* 添加光源效果 - 从底部向上投射的光线 */
-    background: radial-gradient(circle at 50% 100%, 
-        rgba(201, 168, 124, 0.3) 0%, 
-        rgba(201, 168, 124, 0.2) 20%, 
-        rgba(201, 168, 124, 0.1) 40%, 
-        transparent 70%);
-    /* 增加底部光线强度 */
-    box-shadow: 
-        /* 底部主光源 */
-        0 20px 60px rgba(201, 168, 124, 0.3),
-        /* 侧面漫反射 */
-        -20px 0 60px rgba(201, 168, 124, 0.1),
-        20px 0 60px rgba(201, 168, 124, 0.1),
-        /* 顶部反射光 */
-        0 -20px 40px rgba(201, 168, 124, 0.05);
-    pointer-events: none;
-    /* 调整层级，确保在照片下方 */
-    z-index: -1;
-    /* 扩大光晕范围 */
-    transform: scale(1.1);
-    opacity: 0.8;
-}
+/* 删除光影效果，避免视觉残留 */
 
 .photo-image {
     display: block;
@@ -596,10 +568,7 @@ body:has(.intro-screen) .loading-overlay {
         max-height: calc(100vh - 180px);
     }
     
-    .photo-device {
-        font-size: 0.8rem;
-    }
-    
+
     /* 确保在480px以下屏幕上控制栏仍然保持在同一排 */
     .album-controls {
         padding: 10px;
