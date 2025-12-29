@@ -327,21 +327,17 @@ body:has(.intro-screen) .loading-overlay {
     font-size: clamp(0.8rem, 2vw, 0.9rem);
     font-weight: 300;
     letter-spacing: 0.15em;
-    opacity: 0.9;
-    /* 重新定位至照片区域正下方，与照片底部边缘对齐 */
-    display: block;
-    visibility: visible;
-    position: relative;
-    z-index: 10;
-    margin-top: 15px;
+    /* 移到底部，与控制栏保持足够间距 */
+    margin-top: auto;
+    margin-bottom: 80px;
     text-align: center;
-    /* 添加与整体UI风格一致的样式 */
-    text-transform: uppercase;
-    transition: opacity 0.3s ease;
     /* 确保与照片底部边缘对齐 */
     align-self: center;
     /* 保持适当间距 */
     padding: 0 20px;
+    /* 文字更清晰 */
+    opacity: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .photo-device:hover {
