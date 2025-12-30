@@ -4,10 +4,6 @@
 
 一个精致的个人照片回顾网页应用，用30张照片记录2025年的美好瞬间。
 
-[![GitHub stars](https://img.shields.io/github/stars/xuzimo/my-2025-photos)](https://github.com/xuzimo/my-2025-photos/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/xuzimo/my-2025-photos)](https://github.com/xuzimo/my-2025-photos/network)
-[![License](https://img.shields.io/github/license/xuzimo/my-2025-photos)](https://github.com/xuzimo/my-2025-photos/blob/main/LICENSE)
-
 </div>
 
 ## 📖 项目概述
