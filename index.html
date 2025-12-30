@@ -16,10 +16,10 @@
         <div class="intro-background"></div>
         <div class="intro-content" id="introContent">
             <div class="intro-text-content">
-                <p class="intro-quote">"照片是时光的标本"</p>
-                <h1 class="intro-title">用30张照片<br>回顾我的2025</h1>
-                <p class="intro-subtitle">每一帧都是生活的切片</p>
-            </div>
+                    <p class="intro-quote">"照片是时光的标本"</p>
+                    <h1 class="intro-title">用<strong class="decorative-number">30</strong>张照片<br>回顾我的<strong class="decorative-number">2025</strong></h1>
+                    <p class="intro-subtitle">每一帧都是生活的切片</p>
+                </div>
             <button class="open-album-btn" id="openAlbumBtn">
                 <span class="btn-text">打开相册</span>
                 <span class="btn-arrow">→</span>
@@ -32,6 +32,7 @@
         <div class="photo-container" id="photoContainer">
             <div class="photo-wrapper">
                 <div class="photo-frame">
+                    <div class="photo-watermark" id="photoWatermark"></div>
                     <img src="" alt="照片" class="photo-image" id="photoImage">
                 </div>
             </div>
@@ -40,10 +41,10 @@
         <div class="album-controls" id="albumControls">
             <div class="control-left-group">
                 <button class="control-btn" id="homeBtn" title="返回首页">
-                    <span class="icon">🏠</span>
+                    <span class="icon">⌂</span>
                 </button>
                 <button class="control-btn play-btn" id="playBtn" title="自动播放">
-                    <span class="icon" id="playIcon">⏯</span>
+                    <span class="icon" id="playIcon">▶</span>
                 </button>
             </div>
             <span class="photo-counter">
@@ -69,5 +70,16 @@
     </script>
     <!-- 测试脚本，用于验证照片墙点击功能 -->
     <!-- <script src="test-photo-wall.js"></script> -->
+
+    <!-- 图片预览功能 -->
+    <div class="preview-overlay" id="previewOverlay">
+        <div class="preview-container">
+            <img src="" alt="预览图片" class="preview-image" id="previewImage">
+            <button class="preview-btn preview-prev" id="previewPrev" title="上一张">◀</button>
+            <button class="preview-btn preview-next" id="previewNext" title="下一张">▶</button>
+            <button class="preview-close" id="previewClose" title="关闭">×</button>
+            <div class="preview-info" id="previewInfo"></div>
+        </div>
+    </div>
 </body>
 </html>

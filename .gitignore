@@ -1,0 +1,7 @@
+.DS_Store
+.trae/
+.vscode/
+node_modules/
+*.log
+main.js
+style.css

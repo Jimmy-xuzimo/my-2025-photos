@@ -1,7 +1,7 @@
 const PHOTO_DIR = 'photos';
 
 const deviceMapping = {
-    'SONY': 'Sony',
+    'SONY': 'SONY',
     'OPPO': 'OPPO',
     'DJI': 'DJI'
 };
@@ -62,7 +62,7 @@ const elements = {
     photoContainer: document.getElementById('photoContainer'),
     photoFrame: document.getElementById('photoFrame'),
     photoImage: document.getElementById('photoImage'),
-    photoDevice: document.getElementById('photoDevice'),
+    photoWatermark: document.getElementById('photoWatermark'),
     currentIndexEl: document.getElementById('currentIndex'),
     totalCountEl: document.getElementById('totalCount'),
     playBtn: document.getElementById('playBtn'),
@@ -70,14 +70,34 @@ const elements = {
     homeBtn: document.getElementById('homeBtn'),
     prevBtn: document.getElementById('prevBtn'),
     nextBtn: document.getElementById('nextBtn'),
-    loadingOverlay: document.getElementById('loadingOverlay')
+    loadingOverlay: document.getElementById('loadingOverlay'),
+    // 图片预览功能元素
+    previewOverlay: document.getElementById('previewOverlay'),
+    previewImage: document.getElementById('previewImage'),
+    previewPrev: document.getElementById('previewPrev'),
+    previewNext: document.getElementById('previewNext'),
+    previewClose: document.getElementById('previewClose'),
+    previewInfo: document.getElementById('previewInfo')
 };
+
+// 图片预览状态管理
+let isPreviewActive = false;
+let previewCurrentIndex = 0;
+let previewScale = 1;
+let previewPosition = { x: 0, y: 0 };
+let isDragging = false;
+let touchStart = { x: 0, y: 0 };
+let touchCurrent = { x: 0, y: 0 };
+let isZooming = false;
+let initialDistance = 0;
+let initialScale = 1;
 
 function init() {
     preparePhotos();
     bindIntroEvents();
     bindAlbumEvents();
     bindTouchEvents();
+    bindPreviewEvents();
     
     requestAnimationFrame(() => {
         elements.introScreen.classList.add('active');
@@ -174,7 +194,8 @@ function showCurrentPhoto() {
     elements.photoImage.alt = `照片 ${photo.id}`;
     elements.currentIndexEl.textContent = currentIndex + 1;
     
-
+    // 设置水印文字
+    elements.photoWatermark.textContent = `shot on ${photo.device}`;
 }
 
 function navigatePhoto(direction) {
