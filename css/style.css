@@ -78,6 +78,9 @@ body:has(.intro-screen) .loading-overlay {
     z-index: 1000;
     background: var(--bg-primary);
     overflow: hidden;
+    /* 添加内边距作为安全距离 */
+    padding: 10vh 10vw;
+    box-sizing: border-box;
 }
 
 .intro-background {
@@ -663,6 +666,121 @@ body:has(.intro-screen) .loading-overlay {
     .control-left-group,
     .control-right-group {
         gap: 10px;
+    }
+}
+
+/* 电脑端优化 - 确保界面有适当的安全距离 */
+@media (min-width: 1024px) {
+    /* 主界面优化 */
+    .intro-text-content {
+        margin-bottom: 120px;
+    }
+    
+    /* 相册界面优化 */
+    .photo-container {
+        /* 确保容器有适当的内边距作为安全距离 */
+        padding: 5vh 5vw;
+    }
+    
+    .photo-wrapper {
+        /* 调整外边距，确保内容在安全范围内 */
+        margin: 0;
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+    
+    .photo-frame {
+        /* 确保照片框架有适当的尺寸限制 */
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+    
+    .photo-image {
+        /* 计算最大宽度和高度，保留10%的安全距离 */
+        max-width: calc(90vw - 40px);
+        max-height: calc(90vh - 140px);
+    }
+    
+    /* 调整控制栏样式，确保安全距离 */
+    .album-controls {
+        padding: 20px 5vw 30px;
+    }
+    
+    /* 确保导航按钮与屏幕边缘有适当距离 */
+    .control-left-group {
+        margin-left: 0;
+    }
+    
+    .control-right-group {
+        margin-right: 0;
+    }
+    
+    /* 预览功能优化 */
+    .preview-image {
+        max-width: 90%;
+        max-height: 90%;
+    }
+    
+    .preview-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .preview-prev {
+        left: 5vw;
+    }
+    
+    .preview-next {
+        right: 5vw;
+    }
+    
+    .preview-close {
+        top: 5vh;
+        right: 5vw;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .preview-info {
+        bottom: 5vh;
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
+
+/* 超大屏幕优化 */
+@media (min-width: 1600px) {
+    /* 进一步增加安全距离，适应超大屏幕 */
+    .photo-container {
+        padding: 8vh 8vw;
+    }
+    
+    .photo-image {
+        max-width: calc(84vw - 40px);
+        max-height: calc(84vh - 140px);
+    }
+    
+    .album-controls {
+        padding: 20px 8vw 30px;
+    }
+    
+    .preview-prev {
+        left: 8vw;
+    }
+    
+    .preview-next {
+        right: 8vw;
+    }
+    
+    .preview-close {
+        top: 8vh;
+        right: 8vw;
+    }
+    
+    .preview-info {
+        bottom: 8vh;
     }
 }
 
