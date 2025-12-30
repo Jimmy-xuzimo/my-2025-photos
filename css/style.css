@@ -295,6 +295,11 @@ body:has(.intro-screen) .loading-overlay {
     flex: 1;
 }
 
+/* 调整照片容器布局，确保水印和翻页指示器不重叠 */
+.photo-wrapper {
+    gap: 30px;
+}
+
 /* 删除光影效果，避免视觉残留 */
 
 .photo-image {
@@ -315,10 +320,11 @@ body:has(.intro-screen) .loading-overlay {
 }
 
 .photo-watermark {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 20px;
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.5);
     text-align: center;
@@ -477,6 +483,11 @@ body:has(.intro-screen) .loading-overlay {
         max-width: calc(100vw - 30px);
         max-height: calc(100vh - 200px);
     }
+    
+    /* 手机版本水印向上移动200像素 */
+    .photo-watermark {
+        margin-top: -180px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -529,6 +540,11 @@ body:has(.intro-screen) .loading-overlay {
     .photo-image {
         max-width: calc(100vw - 24px);
         max-height: calc(100vh - 200px);
+    }
+    
+    /* 手机版本水印向上移动200像素 */
+    .photo-watermark {
+        margin-top: -180px;
     }
     
     .album-controls {
@@ -607,7 +623,11 @@ body:has(.intro-screen) .loading-overlay {
         max-height: calc(100vh - 180px);
     }
     
-
+    /* 手机版本水印向上移动200像素 */
+    .photo-watermark {
+        margin-top: -180px;
+    }
+    
     /* 确保在480px以下屏幕上控制栏仍然保持在同一排 */
     .album-controls {
         padding: 10px;
@@ -671,9 +691,16 @@ body:has(.intro-screen) .loading-overlay {
 
 /* 电脑端优化 - 确保界面有适当的安全距离 */
 @media (min-width: 1024px) {
-    /* 主界面优化 */
-    .intro-text-content {
-        margin-bottom: 120px;
+    /* 主界面优化 - 整体缩放至70% */
+    .intro-screen .intro-content {
+        transform: scale(0.7);
+        transform-origin: center center;
+    }
+    
+    /* 调整版权信息位置，确保与缩放后的内容协调 */
+    .intro-screen .intro-credit {
+        transform: translateX(-50%) scale(0.7);
+        transform-origin: center center;
     }
     
     /* 相册界面优化 */
@@ -699,6 +726,12 @@ body:has(.intro-screen) .loading-overlay {
         /* 计算最大宽度和高度，保留10%的安全距离 */
         max-width: calc(90vw - 40px);
         max-height: calc(90vh - 140px);
+    }
+    
+    /* 调整水印位置，居中放置于照片区域与翻页指示器之间 */
+    .photo-watermark {
+        /* 设置合适的bottom值，确保与照片和翻页指示器保持适当间距 */
+        bottom: 60px;
     }
     
     /* 调整控制栏样式，确保安全距离 */
